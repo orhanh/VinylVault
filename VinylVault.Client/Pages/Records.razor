@@ -55,7 +55,7 @@
 </section>
 
 @code {
-    private List<Record>? records;
+    private List<RecordReadDto>? records;
     private bool isLoading = true;
     private bool unauthorizedError = false;
     private bool genericError = false;
@@ -78,7 +78,7 @@
                 return;
             }
 
-            records = await response.Content.ReadFromJsonAsync<List<Record>>();
+            records = await response.Content.ReadFromJsonAsync<List<RecordReadDto>>();
         }
         catch (HttpRequestException ex)
         {

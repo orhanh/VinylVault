@@ -49,7 +49,7 @@
 </section>
 
 @code {
-    private Record record = new();
+    private RecordCreateDto record = new();
     private string? successMessage;
     private string? errorMessage;
 
@@ -67,7 +67,7 @@
 
                 StateHasChanged();
                 await Task.Delay(1500);
-                navManager.NavigateTo("/");
+                navManager.NavigateTo("/records");
             }
             else if (response.StatusCode == System.Net.HttpStatusCode.Unauthorized)
             {

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using VinylVault.Shared.DTOs;
 using VinylVault.Shared.Models;
 
 namespace VinylVault.Api.Controllers
@@ -8,7 +9,7 @@ namespace VinylVault.Api.Controllers
     [ApiController]
     public class RecordsController : ControllerBase
     {
-        private readonly List<Record> records = new()
+        private static readonly List<Record> records = new()
         {
             new Record { Id = 1, Artist = "Pink Floyd", Album = "The Dark Side of the Moon", Year = 1973 },
             new Record { Id = 2, Artist = "Daft Punk", Album = "Discovery", Year = 2001 },
@@ -31,7 +32,15 @@ namespace VinylVault.Api.Controllers
         [HttpGet]
         public IActionResult GetAll()
         {
-            return Ok(records);
+            var recordDtos = records.Select(r => new RecordReadDto
+            {
+                Id = r.Id,
+                Artist = r.Artist,
+                Album = r.Album,
+                Year = r.Year
+            }).ToList();
+
+            return Ok(recordDtos);
         }
 
         // GET api/records/5
@@ -39,20 +48,46 @@ namespace VinylVault.Api.Controllers
         public IActionResult GetById(int id)
         {
             var record = records.FirstOrDefault(x => x.Id == id);
-            return Ok(record);
+            if (record == null)
+                return NotFound();
+
+            var dto = new RecordReadDto
+            {
+                Id = record.Id,
+                Artist = record.Artist,
+                Album = record.Album,
+                Year = record.Year
+            };
+
+            return Ok(dto);
         }
 
         // POST api/records
         [HttpPost]
-        public IActionResult Create(Record record)
+        public IActionResult Create(RecordCreateDto dto)
         {
-            if (ModelState.IsValid)
-            {
-                records.Add(record);
-                return Ok("Record added");
-            }
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
 
-            return BadRequest(ModelState);
+            var newRecord = new Record
+            {
+                Id = records.Max(x => x.Id) + 1,
+                Artist = dto.Artist,
+                Album = dto.Album,
+                Year = dto.Year
+            };
+
+            records.Add(newRecord);
+
+            var readDto = new RecordReadDto
+            {
+                Id = newRecord.Id,
+                Artist = newRecord.Artist,
+                Album = newRecord.Album,
+                Year = newRecord.Year
+            };
+
+            return CreatedAtAction(nameof(GetById), new { id = newRecord.Id }, readDto);
 
         }
     }
