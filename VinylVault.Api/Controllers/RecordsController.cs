@@ -8,7 +8,7 @@ namespace VinylVault.Api.Controllers
     [ApiController]
     public class RecordsController : ControllerBase
     {
-        private static readonly List<Record> records = new()
+        private readonly List<Record> records = new()
         {
             new Record { Id = 1, Artist = "Pink Floyd", Album = "The Dark Side of the Moon", Year = 1973 },
             new Record { Id = 2, Artist = "Daft Punk", Album = "Discovery", Year = 2001 },
@@ -54,13 +54,6 @@ namespace VinylVault.Api.Controllers
 
             return BadRequest(ModelState);
 
-        }
-
-        // DELETE api/records/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-            //Delete
         }
     }
 }
