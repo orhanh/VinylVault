@@ -93,7 +93,9 @@
         catch (HttpRequestException ex)
         {
             // CORS error
-            if (ex.Message.Contains("CORS", StringComparison.OrdinalIgnoreCase))
+            if (ex.Message.Contains("CORS", StringComparison.OrdinalIgnoreCase) ||
+                ex.Message.Contains("Failed to fetch", StringComparison.OrdinalIgnoreCase) ||
+                ex.Message.Contains("NetworkError", StringComparison.OrdinalIgnoreCase))
             {
                 corsError = true;
             }
