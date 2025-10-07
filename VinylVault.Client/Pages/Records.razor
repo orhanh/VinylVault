@@ -13,15 +13,6 @@
             <p class="mt-3"><em>Indlæser plader…</em></p>
         </div>
     }
-    else if (corsError)
-    {
-        <div class="alert alert-warning mt-5 text-center mx-auto" style="max-width:600px;">
-            <i class="bi bi-exclamation-triangle-fill me-2"></i>
-            <strong>CORS-fejl:</strong> Din browser blokerer adgangen til API’et.
-            <br />
-            Sørg for at CORS er konfigureret korrekt i Web API’et.
-        </div>
-    }
     else if (unauthorizedError)
     {
         <div class="alert alert-danger mt-5 text-center mx-auto" style="max-width:600px;">
@@ -33,7 +24,7 @@
     {
         <div class="alert alert-danger mt-5 text-center mx-auto" style="max-width:600px;">
             <i class="bi bi-lock-fill me-2"></i>
-            <strong>Fejl:</strong> Der er sket en fejl.
+            <strong>Fejl:</strong> Kunne ikke forbinde til API’et.
         </div>
     }
     else if (records is null || records.Count == 0)
@@ -66,7 +57,6 @@
 @code {
     private List<Record>? records;
     private bool isLoading = true;
-    private bool corsError = false;
     private bool unauthorizedError = false;
     private bool genericError = false;
 
@@ -92,17 +82,7 @@
         }
         catch (HttpRequestException ex)
         {
-            // CORS error
-            if (ex.Message.Contains("CORS", StringComparison.OrdinalIgnoreCase) ||
-                ex.Message.Contains("Failed to fetch", StringComparison.OrdinalIgnoreCase) ||
-                ex.Message.Contains("NetworkError", StringComparison.OrdinalIgnoreCase))
-            {
-                corsError = true;
-            }
-            else
-            {
-                genericError = true;
-            }
+            genericError = true;
         }
         finally
         {
