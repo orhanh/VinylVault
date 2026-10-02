@@ -1,4 +1,4 @@
-@page "/golden-records"
+@page "/golden"
 @inject HttpClient Http
 @inject AuthState AuthState
 
@@ -7,7 +7,7 @@
 <section class="golden-section container py-5">
     <div class="text-center mb-5">
         <h2 class="display-6 fw-bold golden-title mb-2">Gyldne plader</h2>
-        <p class="golden-subtitle mb-0">Et udvalg af klassikere, der har solgt guld – kun for medlemmer.</p>
+        <p class="golden-subtitle mb-0">Et udvalg af klassikere – kun for medlemmer.</p>
     </div>
 
     @if (!AuthState.IsLoggedIn || unauthorizedError)
@@ -69,7 +69,7 @@
 
         try
         {
-            var response = await Http.GetAsync("https://localhost:7142/api/records/golden-records");
+            var response = await Http.GetAsync("https://localhost:7142/api/records/golden");
 
             if (response.StatusCode == System.Net.HttpStatusCode.Unauthorized)
             {
