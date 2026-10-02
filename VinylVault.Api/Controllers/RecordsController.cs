@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using Mapster;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using VinylVault.Shared.DTOs;
 using VinylVault.Shared.Models;
@@ -39,13 +40,7 @@ namespace VinylVault.Api.Controllers
         [HttpGet]
         public IActionResult GetAll()
         {
-            var recordDtos = records.Select(r => new RecordReadDto
-            {
-                Id = r.Id,
-                Artist = r.Artist,
-                Album = r.Album,
-                Year = r.Year
-            }).ToList();
+            var recordDtos = records.Adapt<List<RecordReadDto>>();
 
             return Ok(recordDtos);
         }
@@ -55,13 +50,7 @@ namespace VinylVault.Api.Controllers
         [HttpGet("golden")]
         public IActionResult GetGoldenRecords()
         {
-            var recordDtos = goldenRecords.Select(r => new RecordReadDto
-            {
-                Id = r.Id,
-                Artist = r.Artist,
-                Album = r.Album,
-                Year = r.Year
-            }).ToList();
+            var recordDtos = goldenRecords.Adapt<List<RecordReadDto>>();
 
             return Ok(recordDtos);
         }
@@ -74,13 +63,7 @@ namespace VinylVault.Api.Controllers
             if (record == null)
                 return NotFound();
 
-            var dto = new RecordReadDto
-            {
-                Id = record.Id,
-                Artist = record.Artist,
-                Album = record.Album,
-                Year = record.Year
-            };
+            var dto = record.Adapt<RecordReadDto>();
 
             return Ok(dto);
         }
