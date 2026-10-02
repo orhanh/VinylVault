@@ -50,19 +50,5 @@ namespace VinylVault.Api.Controllers
 
             return Ok(recordDtos);
         }
-
-        // GET api/records/{id}
-        [HttpGet("{id:guid}")]
-        public IActionResult GetById(Guid id)
-        {
-            var record = records.FirstOrDefault(x => x.Id == id);
-
-            if (record == null)
-                return NotFound();
-
-            var dto = record.Adapt<RecordReadDto>();
-
-            return Ok(dto);
-        }
     }
 }
