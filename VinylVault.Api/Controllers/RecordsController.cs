@@ -28,11 +28,34 @@ namespace VinylVault.Api.Controllers
             new Record { Id = Guid.NewGuid(), Artist = "Arctic Monkeys", Album = "AM", Year = 2013 }
         };
 
+        private static readonly List<Record> goldenRecords = new()
+        {
+            new Record { Id = Guid.NewGuid(), Artist = "Michael Jackson", Album = "Thriller", Year = 1982 },
+            new Record { Id = Guid.NewGuid(), Artist = "Pink Floyd", Album = "The Dark Side of the Moon", Year = 1973 },
+            new Record { Id = Guid.NewGuid(), Artist = "Fleetwood Mac", Album = "Rumours", Year = 1977 }
+        };
+
         // GET: api/records
         [HttpGet]
         public IActionResult GetAll()
         {
             var recordDtos = records.Select(r => new RecordReadDto
+            {
+                Id = r.Id,
+                Artist = r.Artist,
+                Album = r.Album,
+                Year = r.Year
+            }).ToList();
+
+            return Ok(recordDtos);
+        }
+
+        // GET api/records/golden-records
+        [Authorize]
+        [HttpGet("golden-records")]
+        public IActionResult GetGoldenRecords()
+        {
+            var recordDtos = goldenRecords.Select(r => new RecordReadDto
             {
                 Id = r.Id,
                 Artist = r.Artist,
