@@ -24,7 +24,7 @@ namespace VinylVault.Api.Controllers
             new Record { Id = 11, Artist = "Kanye West", Album = "808s & heartbreak", Year = 2008 },
             new Record { Id = 12, Artist = "Tame Impala", Album = "Currents", Year = 2015 },
             new Record { Id = 13, Artist = "Bob Marley & The Wailers", Album = "Legend", Year = 1984 },
-            new Record { Id = 14, Artist = "Bladee", Album = "Cold Visions", Year = 2024 },
+            new Record { Id = 14, Artist = "Kid Cudi", Album = "Man on the Moon", Year = 2009 },
             new Record { Id = 15, Artist = "Arctic Monkeys", Album = "AM", Year = 2013 }
         };
 
