@@ -87,7 +87,7 @@
                 }
 
                 AuthState.SignIn(loginModel.Email, token.AccessToken);
-                NavManager.NavigateTo("/records");
+                NavManager.NavigateTo("/golden");
             }
             else if (response.StatusCode == System.Net.HttpStatusCode.Unauthorized)
             {
