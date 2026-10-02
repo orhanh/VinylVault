@@ -84,34 +84,5 @@ namespace VinylVault.Api.Controllers
 
             return Ok(dto);
         }
-
-        // POST api/records
-        [HttpPost]
-        public IActionResult Create(RecordCreateDto dto)
-        {
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
-
-            var newRecord = new Record
-            {
-                Id = Guid.NewGuid(),
-                Artist = dto.Artist,
-                Album = dto.Album,
-                Year = dto.Year
-            };
-
-            records.Add(newRecord);
-
-            var readDto = new RecordReadDto
-            {
-                Id = newRecord.Id,
-                Artist = newRecord.Artist,
-                Album = newRecord.Album,
-                Year = newRecord.Year
-            };
-
-            return CreatedAtAction(nameof(GetById), new { id = newRecord.Id }, readDto);
-
-        }
     }
 }
