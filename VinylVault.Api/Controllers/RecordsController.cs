@@ -45,7 +45,7 @@ namespace VinylVault.Api.Controllers
             return Ok(recordDtos);
         }
 
-        // GET api/records/golden-records
+        // GET api/records/golden
         [Authorize]
         [HttpGet("golden")]
         public IActionResult GetGoldenRecords()
