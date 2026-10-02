@@ -13,7 +13,7 @@ namespace VinylVault.Api.Controllers
         private static readonly List<Record> records = new()
         {
             new Record { Id = Guid.NewGuid(), Artist = "Pink Floyd", Album = "The Dark Side of the Moon", Year = 1973, IsGolden = true },
-            new Record { Id = Guid.NewGuid(), Artist = "Daft Punk", Album = "Discovery", Year = 2001 },
+            new Record { Id = Guid.NewGuid(), Artist = "Daft Punk", Album = "Random Access Memories", Year = 2013 },
             new Record { Id = Guid.NewGuid(), Artist = "Fleetwood Mac", Album = "Rumours", Year = 1977, IsGolden = true },
             new Record { Id = Guid.NewGuid(), Artist = "Nirvana", Album = "Nevermind", Year = 1991 },
             new Record { Id = Guid.NewGuid(), Artist = "Michael Jackson", Album = "Thriller", Year = 1982, IsGolden = true },
@@ -29,7 +29,7 @@ namespace VinylVault.Api.Controllers
             new Record { Id = Guid.NewGuid(), Artist = "Arctic Monkeys", Album = "AM", Year = 2013 },
             new Record { Id = Guid.NewGuid(), Artist = "Amy Winehouse", Album = "Back to Black", Year = 2006 },
             new Record { Id = Guid.NewGuid(), Artist = "Led Zeppelin", Album = "IV", Year = 1971 },
-            new Record { Id = Guid.NewGuid(), Artist = "Massive Attack", Album = "Mezzanine", Year = 1998 }
+            new Record { Id = Guid.NewGuid(), Artist = "Tyler, The Creator", Album = "IGOR", Year = 2019 }
         };
 
         // GET: api/records
