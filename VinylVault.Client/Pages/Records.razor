@@ -80,7 +80,7 @@
 
             records = await response.Content.ReadFromJsonAsync<List<RecordReadDto>>();
         }
-        catch (HttpRequestException ex)
+        catch (HttpRequestException)
         {
             genericError = true;
         }
