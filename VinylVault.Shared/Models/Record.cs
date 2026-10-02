@@ -17,6 +17,6 @@ namespace VinylVault.Shared.Models
         [Required]
         [Range(1, 2025)]
         public int Year { get; set; }
-
+        public bool IsGolden { get; set; }
     }
 }
